@@ -1,0 +1,43 @@
+/* Improved subscribe.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4; /* Soft background color */
+}
+
+.subscription-success {
+    text-align: center;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    max-width: 400px; /* Ensures it doesn't stretch too wide on larger screens */
+}
+
+.subscription-success h1 {
+    color: #4CAF50;
+    margin-bottom: 0.5rem;
+}
+
+.subscription-success p {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.subscription-success a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.subscription-success a:hover {
+    color: #0056b3; /* Darker shade on hover for better interaction */
+}

@@ -260,8 +260,33 @@
 					<div class="footer-box subscribe">
 						<h2 class="widget-title">Subscribe</h2>
 						<p>Subscribe to our mailing list to get the latest updates.</p>
-						<form action="index.html">
-							<input type="email" placeholder="Email">
+						<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+						<script type="text/javascript">
+							(function(){
+								emailjs.init("your_user_id"); // Replace 'your_user_id' with your actual EmailJS user ID
+							})();
+						
+							document.getElementById('emailForm').addEventListener('submit', function(event) {
+								event.preventDefault();
+						
+								// Prepare the email parameters
+								var params = {
+									to_name: "Recipient Name",
+									from_name: document.getElementById('emailInput').value,
+									message: "You have a new subscriber!"
+								};
+						
+								// Send the email
+								emailjs.send('your_service_id', 'your_template_id', params)
+									.then(function(response) {
+										console.log('SUCCESS!', response.status, response.text);
+									}, function(error) {
+										console.log('FAILED...', error);
+									});
+							});
+						</script>
+						<form action="/subscribe" id="emailForm" method="post">
+							<input type="email" id="emailInput" name="email" placeholder="Email" required>
 							<button type="submit"><i class="fas fa-paper-plane"></i></button>
 						</form>
 					</div>
