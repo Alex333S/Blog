@@ -51,7 +51,7 @@ const transporter = nodemailer.createTransport({
         ciphers: 'SSLv3' // This might be necessary if you run into connection issues
     }
 });
-//https://mmtest123yes.m-pages.com/ECaiUD/good
+
 
 
 
