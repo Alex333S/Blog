@@ -8,12 +8,15 @@ import nodemailer from 'nodemailer';
 import fetch from 'node-fetch'; // Ensure you have 'node-fetch' installed
 
 
+
+
 const app = express();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //const path = require('path');
 app.use(express.static('.'));
-
+app.use(express.json());
 
 
 //TO MAKE IT WORK YOU MUST CREATE file with name strictly '.env'  IN THE ROOT DIRECTORY AND ADD YOUR EMAIL AND PASSWORD, OTHERWISE IT WILL NOT HAVE ACCESS TO THE EMAIL YOU SENDING FROM
@@ -21,6 +24,18 @@ app.use(express.static('.'));
 // + change the email to your email in mailOptions.
 
 // May be we need a corporate email to send emails. Like dummy email.
+
+async function getSecret(secretName) {
+    try {
+        const data = await secretsManager.getSecretValue({ SecretId: secretName }).promise();
+        if ('SecretString' in data) {
+            return JSON.parse(data.SecretString);
+        }
+    } catch (error) {
+        console.error('Error fetching secret:', error);
+        throw error;
+    }
+}
 
 console.log('Email:', process.env.EMAIL, 'Password:', process.env.PASSWORD);
 // Configure nodemailer SMTP transporter
@@ -36,56 +51,17 @@ const transporter = nodemailer.createTransport({
         ciphers: 'SSLv3' // This might be necessary if you run into connection issues
     }
 });
+//https://mmtest123yes.m-pages.com/ECaiUD/good
+
+
 
 app.post('/subscribe', async (req, res) => { 
     console.log(req.body);
-    const email = req.body.email; 
-    const apiKey = 'nope'; // Your Moosend API key
-    const listId = 'nope'; 
-    const moosendApiUrl = `https://api.moosend.com/v3/lists/${listId}/subscribers.json/subscribe?apikey=${apiKey}`;
-
-    const subscriberData = {
-        Email: email, 
-        Name: 'S',
-    };
     
-    try {
-        const response = await fetch(moosendApiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(subscriberData)
-        });
-    
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-    
-        // Attempt to parse the response as JSON
-        let data;
-        try {
-            data = await response.json();
-        } catch (error) {
-            // If parsing fails, log the error and throw to skip to the catch block
-            console.error('Failed to parse JSON:', error);
-            throw new Error('Failed to parse JSON response');
-        }
-    
-        // Proceed with your logic only if JSON parsing was successful
-        if (data && data.Code === 0) {
-            
-        } else {
-            console.log('Moosend subscription error:', data.Error);
-            res.status(500).send('Error subscribing to Moosend.');
-        }
-    } catch (error) {
-        console.log('Error:', error);
-        
-    }
     
     // to send an email
     const mailOptions = {
-        from: '......', //PUT UR SENDER EMAIL ADDRESS WHICH WILL BE MAIN SENDER FOR EVERY EMAIL
+        from: 'jet1999@open.com', //PUT UR SENDER EMAIL ADDRESS WHICH WILL BE MAIN SENDER FOR EVERY EMAIL
         to: email,
         subject: 'Subscription Confirmation',
         html: '<p>You have successfully subscribed!</p><img src="cid:unique@cid" alt="Image">',
@@ -112,7 +88,6 @@ app.post('/subscribe', async (req, res) => {
 
     // Email options
     
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
