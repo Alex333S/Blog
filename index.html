@@ -256,41 +256,26 @@
 						</ul>
 					</div>
 				</div>
+				
 				<div class="col-lg-3 col-md-6">
+					
 					<div class="footer-box subscribe">
+						<div data-mooform-id="bc0cd70b-69c2-495f-8200-2bbdaf089df6" ></div>
 						<h2 class="widget-title">Subscribe</h2>
 						<p>Subscribe to our mailing list to get the latest updates.</p>
 						<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-						<script type="text/javascript">
-							(function(){
-								emailjs.init("your_user_id"); // Replace 'your_user_id' with your actual EmailJS user ID
-							})();
 						
-							document.getElementById('emailForm').addEventListener('submit', function(event) {
-								event.preventDefault();
 						
-								// Prepare the email parameters
-								var params = {
-									to_name: "Recipient Name",
-									from_name: document.getElementById('emailInput').value,
-									message: "You have a new subscriber!"
-								};
-						
-								// Send the email
-								emailjs.send('your_service_id', 'your_template_id', params)
-									.then(function(response) {
-										console.log('SUCCESS!', response.status, response.text);
-									}, function(error) {
-										console.log('FAILED...', error);
-									});
-							});
-						</script>
-						<div data-mooform-id="bc0cd70b-69c2-495f-8200-2bbdaf089df6" ></div>
 						<script>
 							//load TrackerJS
 							!function(t,n,e,o,a){function d(t){var n=~~(Date.now()/3e5),o=document.createElement(e);o.async=!0,o.src=t+"?ts="+n;var a=document.getElementsByTagName(e)[0];a.parentNode.insertBefore(o,a)}t.MooTrackerObject=a,t[a]=t[a]||function(){return t[a].q?void t[a].q.push(arguments):void(t[a].q=[arguments])},window.attachEvent?window.attachEvent("onload",d.bind(this,o)):window.addEventListener("load",d.bind(this,o),!1)}(window,document,"script","//cdn.stat-track.com/statics/moosend-tracking.min.js","mootrack");
 							//tracker has to be initialized otherwise it will generate warnings and wont sendtracking events
-							mootrack('init', 'ca7f291c-ab17-4389-8d46-c6561a58fc51');
+							mootrack('init', '68a1d063-ac9b-4937-b92d-a0901e174894');
+							// identify with email
+							mootrack('identify', 'john@doe.com');
+
+
+
 							</script>
 						<script>if(!window.mootrack){ !function(t,n,e,o,a){function d(t){var n=~~(Date.now()/3e5),o=document.createElement(e);o.async=!0,o.src=t+"?ts="+n;var a=document.getElementsByTagName(e)[0];a.parentNode.insertBefore(o,a)}t.MooTrackerObject=a,t[a]=t[a]||function(){return t[a].q?void t[a].q.push(arguments):void(t[a].q=[arguments])},window.attachEvent?window.attachEvent("onload",d.bind(this,o)):window.addEventListener("load",d.bind(this,o),!1)}(window,document,"script","https://cdn.stat-track.com/statics/moosend-tracking.min.js","mootrack"); } mootrack('loadForm', 'bc0cd70b69c2495f82002bbdaf089df6');</script>
 						<form action="/subscribe" id="emailForm" method="post">
